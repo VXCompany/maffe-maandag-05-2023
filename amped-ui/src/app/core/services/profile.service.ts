@@ -56,4 +56,28 @@ export class ProfileService {
       })
     );
   }; 
+
+  updateProfile = (nickname: string, bio: string): Observable<ApiResponseModel> => {
+    const config: RequestConfigModel = {
+      url: `${env.api.profileUrl}/profile`,
+      method: 'PUT',
+      options: {
+        headers: {
+          'content-type': 'application/json',
+        },
+        body: `{"nickname":"${nickname}", "bio":"${bio}"}`,
+      }
+    };
+
+    return this.externalApiService.callExternalApi(config).pipe(
+      mergeMap((response) => {
+        const { data, error } = response;
+
+        return of({
+          data: data ? (data as AmpedProfileModel) : null,
+          error,
+        });
+      })
+    );
+  }; 
 }

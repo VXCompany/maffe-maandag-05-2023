@@ -62,4 +62,18 @@ export class ProfileComponent {
     });
   }
 
+    updateProfile(nickname: string, bio:string) {
+    this.profileService.updateProfile(nickname, bio).subscribe((response) => {
+      const { data, error } = response;
+
+      if (data) {
+          console.log(data);
+      }
+
+      if (error) {
+        console.log(JSON.stringify(error, null, 2));
+      }
+    });
+  }
+
 }
