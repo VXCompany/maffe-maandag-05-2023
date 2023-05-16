@@ -33,4 +33,27 @@ export class ProfileService {
     );
   };
 
+  createProfile = (nickname: string, bio: string): Observable<ApiResponseModel> => {
+    const config: RequestConfigModel = {
+      url: `${env.api.profileUrl}/profile`,
+      method: 'POST',
+      options: {
+        headers: {
+          'content-type': 'application/json',
+        },
+        body: `{"nickname":"${nickname}", "bio":"${bio}"}`,
+      }
+    };
+
+    return this.externalApiService.callExternalApi(config).pipe(
+      mergeMap((response) => {
+        const { data, error } = response;
+
+        return of({
+          data: data ? (data as AmpedProfileModel) : null,
+          error,
+        });
+      })
+    );
+  }; 
 }

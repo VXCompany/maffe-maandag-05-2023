@@ -16,6 +16,8 @@ import { map } from 'rxjs/operators';
 })
 export class ProfileComponent {
 
+  isNewProfile: Boolean = false;
+
   title = 'Decoded ID Token';
 
   user$ = this.authService.user$;
@@ -26,7 +28,6 @@ export class ProfileComponent {
     userid: '',
     bio: ''
   };
-
 
   constructor(private authService: AuthService, public profileService: ProfileService) {}
 
@@ -40,7 +41,25 @@ export class ProfileComponent {
 
       if (error) {
         console.log(JSON.stringify(error, null, 2));
+        if (error.status == "404") {
+          this.isNewProfile = true;
+        }
       }
     });
   }
+
+  createProfile(nickname: string, bio:string) {
+    this.profileService.createProfile(nickname, bio).subscribe((response) => {
+      const { data, error } = response;
+
+      if (data) {
+          console.log(data);
+      }
+
+      if (error) {
+        console.log(JSON.stringify(error, null, 2));
+      }
+    });
+  }
+
 }

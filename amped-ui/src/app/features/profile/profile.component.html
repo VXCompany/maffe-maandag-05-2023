@@ -4,7 +4,8 @@
       <div class="form">
         <input [(ngModel)]="profile.nickname" #nickname type="text" value="Enter a nickname" /><br/><br/>
         <input [(ngModel)]="profile.bio" #bio type="text" value="Enter a bio" />
-        <button class="button__add" >Save</button>
+        <button *ngIf="this.isNewProfile" class="button__add" (click)="createProfile(nickname.value, bio.value)" >Create</button>
+        <button *ngIf="!this.isNewProfile" class="button__add" >Save</button>
       </div>
       
     </div>

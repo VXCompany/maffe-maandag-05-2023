@@ -41,7 +41,7 @@ export class BookmarkService {
         headers: {
           'content-type': 'application/json',
         },
-        body: `{"uri":"${uri} "}`,
+        body: `{"uri":"${uri}"}`,
       }
     };
 

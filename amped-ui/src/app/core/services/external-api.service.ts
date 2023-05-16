@@ -24,6 +24,7 @@ export class ExternalApiService {
             return of({
               data: null,
               error: err.error,
+              status: err.status,
             });
           }
 
@@ -31,6 +32,7 @@ export class ExternalApiService {
             data: null,
             error: {
               message: err.message,
+              status: err.status
             },
           });
         })

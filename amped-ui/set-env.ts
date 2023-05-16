@@ -16,7 +16,7 @@ const envConfigFile = `export const environment = {
     authorizationParams: {
       audience: '${process.env['AUTH0_AUDIENCE']}',
       redirect_uri: '${process.env['AUTH0_CALLBACK_URL']}',
-      scope: 'openid profile email write:bookmarks'
+      scope: 'openid profile email offline_access write:bookmark read:profile write:profile'
     },
     useRefreshTokens: true,
   },
