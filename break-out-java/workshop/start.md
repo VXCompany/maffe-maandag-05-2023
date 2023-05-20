@@ -28,6 +28,13 @@ Bekijk de ADR voor de [AOT met Quarkus](../../docs/ADR/2.%20AOT%20met%20Quarkus.
 
 Dit is een goed moment om samen even naar de User Story te kijken. Misschien zelfs even een korte refinement te plannen en een aanvalsplan te maken. 
 
+[User Profiles](../../docs/backlog/2.%20User%20profiles.md)
+
+Het persona wat hier bij hoort:
+
+![](../../docs/personas/shelly.png)
+
+
 ## De techniek
 
 Op basis van de refinement kunnen we aan de slag. Wij kozen voor de volgende componenten, maar uiteraard is die keuze helemaal aan jullie!

@@ -47,6 +47,13 @@ dotnet dev-certs https --trust
 
 Dit is een goed moment om samen even naar de User Story te kijken. Misschien zelfs even een korte refinement te plannen en een aanvalsplan te maken. 
 
+[Bookmarks](../../docs/backlog/1.%20Bookmarks.md)
+
+Het persona wat hier bij hoort:
+
+![](../../docs/personas/parker.png)
+
+
 ## De techniek
 
 Op basis van de refinement kunnen we aan de slag. Wij kozen voor de volgende componenten, maar uiteraard is die keuze helemaal aan jullie!
