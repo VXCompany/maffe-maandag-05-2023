@@ -4,7 +4,7 @@ Installeer dependencies:
 npm install
 ```
 
-Update de environment file (.env in de root van het Angular project) met de juiste waarden:
+Maak de environment file (.env in de root van het Angular project) met de juiste waarden:
 
 ```bash
 API_BOOKMARK_URL=http://localhost:6060

@@ -56,8 +56,8 @@ quarkus extension add 'quarkus-hibernate-orm-panache'
 ```
 
 * Een in-memory database. Kan ook met een repository o.i.d., maar in dit geval is een "echte" database wel handig.
-* Database en Quarkus en Hibernate... dan is Panache wel een heel fijne optie https://quarkus.io/guides/hibernate-orm-panache
-* Hier gebruiken we de Quarkus CLI. Kan natuurlijk ook met mvn.
+* Database en Quarkus en Hibernate... dan is Panache wel een heel fijne optie https://quarkus.io/guides/hibernate-orm-panache.
+* Hier gebruiken we de Quarkus CLI. Kan natuurlijk ook met mvn. Of genereer het gehele project met alle extensions via https://code.quarkus.io/ (a la Spring Initializr).
 
 ## Aan de slag
 
@@ -67,12 +67,26 @@ Kijk of je de volgende Quarkus features tegenkomt en/of kunt (of zelfs moet) geb
 * Hot Reload
 * Developer UI
 * AOT / Native Applications
+* https://code.quarkus.io/ 
 
 ## Tips
 
+### Postman collectie
+
+Er is een Postman collectie met daarin enkele (voor de hand liggende) calls. Deze collectie is ook voorbereid op de Authorization met Auth0. Hier moet je dan wel nog de juiste waarden in de variabelen zetten. Gebruik hiervoor de verstrekte gegevens.
+
+1. Import de Postman collectie. Je vindt deze in ./postman/Kennisdag.postman_collection.json.
+2. Update de variabelen van de collectie.
+
+![](/postman/postman1.png)
+
+Je kunt daarna Postman gebruiken voor het ophalen van bijvoorbeeld een Access Token (zodat je je API kunt testen).
+
+![](/postman/postman2.png)
+
 ### Scope vs Role Based claims
 
-Quarkus werkt uit de doos met Role Based claims. In deze workshop maken we liever gebruik van de (meer algemene) Resource Scope claims. Op zich geen probleem, maar de standaard annotaties voldoen dus niet. Onze oplossing was: Scope claim injecteren en in de methods controleren.
+Quarkus werkt uit de doos met Role Based claims. In deze workshop maken we liever gebruik van de (meer algemene) Resource Scope claims. Op zich geen probleem, maar de standaard annotaties helpen dus niet. Onze oplossing was: Scope claim injecteren en in de methods controleren.
 
 ```java
     @Inject
@@ -92,4 +106,26 @@ Quarkus werkt uit de doos met Role Based claims. In deze workshop maken we lieve
 
         return Response.ok(profile).build();
     }
+```
+
+### Seed van de H2
+
+Om lekker snel aan de slag te kunnen, zou je de H2 kunnen seeden met wat demo data. Waar je even op moet letten is dat de Hot Reload je applicatie op een bijzondere manier "herstart" en dat je seed script o.i.d. wellicht steeds gedraaid wordt. Onze oplossing is het script als JDBC INIT script te draaien en in de SQL rekening te houden met reeds bestaande tabellen etc.
+
+```
+quarkus.datasource.db-kind=h2
+quarkus.datasource.jdbc.url=jdbc:h2:mem:default;DB_CLOSE_DELAY=-1;INIT=RUNSCRIPT FROM 'classpath:demo.sql'
+quarkus.hibernate-orm.dialect=org.hibernate.dialect.H2Dialect
+```
+
+```sql
+--demo.sql
+CREATE TABLE IF NOT EXISTS profile (
+   nickName varchar(255),
+   bio varchar(255),
+   userId varchar(255),
+   primary key (userId)
+);
+
+MERGE INTO profile (nickName, bio, userId) VALUES ('YurBur', 'My words. My message.', 'google-oauth2|100000000000000000001');
 ```

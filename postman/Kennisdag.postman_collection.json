@@ -1,0 +1,274 @@
+{
+	"info": {
+		"_postman_id": "b7332db1-23e9-4e5c-b9f7-84f0eb6c4816",
+		"name": "Kennisdag",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Bookmark",
+			"item": [
+				{
+					"name": "Create Bookmark",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"uri\":\"http://www.nu.nl\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_BOOKMARK_URL}}/bookmark",
+							"host": [
+								"{{API_BOOKMARK_URL}}"
+							],
+							"path": [
+								"bookmark"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Bookmarks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_BOOKMARK_URL}}/bookmark",
+							"host": [
+								"{{API_BOOKMARK_URL}}"
+							],
+							"path": [
+								"bookmark"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Unread Bookmarks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_BOOKMARK_URL}}/bookmark/unread",
+							"host": [
+								"{{API_BOOKMARK_URL}}"
+							],
+							"path": [
+								"bookmark",
+								"unread"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Profile",
+			"item": [
+				{
+					"name": "Create Profile",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"nickname\":\"themuckman\", \"bio\":\"I was never good with words...\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_PROFILE_URL}}/profile",
+							"host": [
+								"{{API_PROFILE_URL}}"
+							],
+							"path": [
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Profile",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"nickname\":\"yurbur\", \"bio\":\"I was never good with words...\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_PROFILE_URL}}/profile",
+							"host": [
+								"{{API_PROFILE_URL}}"
+							],
+							"path": [
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_PROFILE_URL}}/profile",
+							"host": [
+								"{{API_PROFILE_URL}}"
+							],
+							"path": [
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Profile by Nickname",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_PROFILE_URL}}/profile/yurbur",
+							"host": [
+								"{{API_PROFILE_URL}}"
+							],
+							"path": [
+								"profile",
+								"yurbur"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "oauth2",
+		"oauth2": [
+			{
+				"key": "accessTokenUrl",
+				"value": "https://{{AUTH0_DOMAIN}}/oauth/token",
+				"type": "string"
+			},
+			{
+				"key": "authUrl",
+				"value": "https://{{AUTH0_DOMAIN}}/authorize?audience={{AUTH0_AUDIENCE}}",
+				"type": "string"
+			},
+			{
+				"key": "clientId",
+				"value": "{{AUTH0_CLIENT_ID}}",
+				"type": "string"
+			},
+			{
+				"key": "state",
+				"value": "random_string",
+				"type": "string"
+			},
+			{
+				"key": "scope",
+				"value": "openid profile email offline_access write:bookmark read:profile write:profile",
+				"type": "string"
+			},
+			{
+				"key": "client_authentication",
+				"value": "body",
+				"type": "string"
+			},
+			{
+				"key": "useBrowser",
+				"value": true,
+				"type": "boolean"
+			},
+			{
+				"key": "redirect_uri",
+				"value": "http://localhost:4040/callback",
+				"type": "string"
+			},
+			{
+				"key": "tokenName",
+				"value": "amped",
+				"type": "string"
+			},
+			{
+				"key": "grant_type",
+				"value": "authorization_code_with_pkce",
+				"type": "string"
+			},
+			{
+				"key": "addTokenTo",
+				"value": "header",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "AUTH0_CLIENT_ID",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "AUTH0_AUDIENCE",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "AUTH0_DOMAIN",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "API_BOOKMARK_URL",
+			"value": "http://localhost:7070",
+			"type": "default"
+		},
+		{
+			"key": "API_PROFILE_URL",
+			"value": "http://localhost:8080",
+			"type": "default"
+		}
+	]
+}

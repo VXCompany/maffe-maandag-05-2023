@@ -84,9 +84,22 @@ Kijk of je de volgende Minimal API features tegenkomt en/of kunt (of zelfs moet)
 
 ## Tips
 
+### Postman collectie
+
+Er is een Postman collectie met daarin enkele (voor de hand liggende) calls. Deze collectie is ook voorbereid op de Authorization met Auth0. Hier moet je dan wel nog de juiste waarden in de variabelen zetten. Gebruik hiervoor de verstrekte gegevens.
+
+1. Import de Postman collectie. Je vindt deze in ./postman/Kennisdag.postman_collection.json.
+2. Update de variabelen van de collectie.
+
+![](/postman/postman1.png)
+
+Je kunt daarna Postman gebruiken voor het ophalen van bijvoorbeeld een Access Token (zodat je je API kunt testen).
+
+![](/postman/postman2.png)
+
 ### Scope vs Role Based claims
 
-ASP.NET werkt het liefst met Role Based claims. In deze workshop maken we liever gebruik van de (meer algemene) Resource Scope claims. Op zich geen probleem, maar de standaard Authorization Policy Builder heeft daar niet direct de juiste methodes voor. Onze oplossing was een eigen Authorization Requirement toevoegen die de check op scope doet. 
+ASP.NET werkt uit de doos met Role Based claims. In deze workshop maken we liever gebruik van de (meer algemene) Resource Scope claims. Op zich geen probleem, maar de standaard Authorization Policy Builder heeft daar niet direct de juiste methodes voor. Onze oplossing was een eigen Authorization Requirement toevoegen die de check op scope doet. 
 
 ```csharp
 builder.Services.AddAuthorization(options =>
