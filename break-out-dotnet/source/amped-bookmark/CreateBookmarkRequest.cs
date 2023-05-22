@@ -1,0 +1,1 @@
+﻿internal record CreateBookmarkRequest(string Uri);
