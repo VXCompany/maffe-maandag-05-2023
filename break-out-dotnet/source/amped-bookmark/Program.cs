@@ -1,7 +1,13 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// add sqlite
+builder.Services.AddDbContext<BookmarkContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("BookmarkContext")));
 
 //add auth0 authentication
 builder.Services.AddAuthentication(options =>
@@ -33,16 +39,30 @@ var app = builder.Build();
 app.UseAuthentication();
 app.UseAuthorization();
 
-//post a bookmark
-app.MapPost("/bookmark", (CreateBookmarkRequest bookmark) =>
+// get a bookmark by id
+app.MapGet("/bookmark", async (BookmarkContext db) =>
 {
+    var bookmarks = await db.Bookmarks.ToListAsync();
+    return bookmarks;
+});
+
+//post a bookmark
+app.MapPost("/bookmark", async (CreateBookmarkRequest request, ClaimsPrincipal user, BookmarkContext db) =>
+{
+    // map bookmark to domain object
+    var bookmark = new Bookmark
+    {
+        Url = request.Uri,
+        ProfileId = user.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value,
+        Read = false
+    };
+    
+    // use sqlite to store the bookmark
+    db.Add(bookmark);
+    await db.SaveChangesAsync();
+
     return bookmark;
 }).RequireAuthorization("write:bookmark");
 
-app.MapGet("/bookmark", () => new List<Bookmark>
-{
-    new Bookmark { Url = "https://www.google.com", ProfileId = 1, Read = false },
-    new Bookmark { Url = "https://www.bing.com", ProfileId = 2, Read = true },
-    new Bookmark { Url = "https://www.yahoo.com", ProfileId = 3, Read = false }
-});
 app.Run();
+

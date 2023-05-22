@@ -3,7 +3,8 @@
 //create the bookmark class
 public class Bookmark
 {
+    public Guid Id { get; set; }
     public string Url { get; set; }
-    public int ProfileId { get; set; }
+    public string ProfileId { get; set; }
     public bool Read { get; set; }
 }
