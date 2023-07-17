@@ -5,6 +5,8 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>amped_bookmark</RootNamespace>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <UserSecretsId>bc736bb3-450e-4445-ab57-a6fc2bda2740</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
